@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool playerEndTurn;
+
     public GameObject markerSelect;
 
     public GameObject action;
@@ -26,18 +28,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        PlayerEndTurn();
     }
 
     private void OnMouseDown()
     {
-        if(sbm.playerActive != gameObject && sbm.playerActive != null)
+        if(playerEndTurn == false)
         {
-            sbm.PlayerDeSelect();
-        }
+            if(sbm.playerActive != gameObject && sbm.playerActive != null)
+            {
+                sbm.PlayerDeSelect();
+            }
 
-        PlayerSelect();
-        sbm.PlayerSelect(gameObject);
+            PlayerSelect();
+            sbm.PlayerSelect(gameObject);
+        }
+        
     }
 
 
@@ -56,6 +62,21 @@ public class PlayerController : MonoBehaviour
     public void ActionButton()
     {
         print("Atacando al" + sbm.enemyTarget.name);
-        playerAnim.SetTrigger("ATTACK");
+        playerAnim.SetTrigger("Atk");
+        playerEndTurn = true;
+    }
+
+    public void PlayerEndTurn()
+    {
+        if(playerEndTurn)
+        {
+            markerSelect.SetActive(false);
+            action.SetActive(false);
+        }
+    }
+
+    public void EnemyDamage()
+    {
+        sbm.enemyTarget.GetComponent<EnemyController>().enemyAnim.SetTrigger("Damage");
     }
 }

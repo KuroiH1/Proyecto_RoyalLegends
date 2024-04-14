@@ -9,10 +9,17 @@ public class EnemyController : MonoBehaviour
 
     private BattleManager sbm;
 
+    public bool enemyEndTurn;
+
+    public GameObject playerTarget;
+
+    public Animator enemyAnim;
+
 
     private void Awake()
     {
         sbm = FindObjectOfType<BattleManager>();
+        enemyAnim = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -50,5 +57,12 @@ public class EnemyController : MonoBehaviour
     public void EnemyDeSelect()
     {
         markerSelect.SetActive(false);
+    }
+
+    public void EnemyAtk()
+    {
+        playerTarget = sbm.players[Random.Range(0,sbm.players.Length)];
+        transform.LookAt(playerTarget.transform);
+        enemyEndTurn = true;
     }
 }
