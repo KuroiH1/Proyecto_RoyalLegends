@@ -8,7 +8,7 @@ public class MenuLevels : MonoBehaviour
     public void Level1()
     {
         // Carga la escena del juego
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("JUEGO_PRINCIPAL");
     }
 
     public void Level2()
@@ -26,7 +26,7 @@ public class MenuLevels : MonoBehaviour
     public void Volver()
     {
         // Carga la escena del Menu Principal
-        SceneManager.LoadScene("MenuInicio");
+        SceneManager.LoadScene("MENU_PRINCIPAL");
     }
 
     public void Arena()
